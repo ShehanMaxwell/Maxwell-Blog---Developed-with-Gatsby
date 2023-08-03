@@ -76,7 +76,7 @@ exports.createPages = ({ graphql, actions }) => {
           // Optional context data you can pass to the template component.
           slug: node.fields.slug,
         },
-      })
+      })//
     })
   })
 }
