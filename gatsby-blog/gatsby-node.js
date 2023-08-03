@@ -1,42 +1,3 @@
-// const { createFilePath } = require(`gatsby-source-filesystem`)
-
-// exports.onCreateNode = ({ node, getNode, actions }) => {
-//   const { createNodeField } = actions
-//   if (node.internal.type === `MarkdownRemark`) {
-//     const slug = createFilePath({ node, getNode })
-
-//     createNodeField({
-//       node,
-//       name: `slug`,
-//       value: slug,
-//     })
-//   }
-// }
-
-// export.createPages = ({graphql, actions}) => {
-//   const {createPage} = actions
-//   return graphql(`
-//     {
-//       allMarkdownRemark {
-//         edges {
-//           node {
-//             fields {
-//               slug
-//             }
-//           }
-//         }
-//       }
-//     }
-
-//   `).then(result => {
-//     result.data.allMarkdownRemark.edges.forEach(({node})=>{
-//       createPage({
-//         path: node.fields.slug,
-//         component:
-//       })
-//     })
-//   })
-// }
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -57,12 +18,19 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return graphql(`
     {
-      allMarkdownRemark {
+      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
         edges {
           node {
+            id
+            frontmatter {
+              description
+              title
+              date
+            }
             fields {
               slug
             }
+            excerpt
           }
         }
       }
@@ -76,7 +44,7 @@ exports.createPages = ({ graphql, actions }) => {
           // Optional context data you can pass to the template component.
           slug: node.fields.slug,
         },
-      })//
+      }) //
     })
   })
 }

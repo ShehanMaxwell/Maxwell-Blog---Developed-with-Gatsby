@@ -1,5 +1,5 @@
 ---
-title: "My First AMA"
+title: "Witcher 3 Trailer"
 date: "2017-08-21"
 description: "My first AMA :)"
 ---
